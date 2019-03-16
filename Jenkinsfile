@@ -16,7 +16,7 @@ pipeline {
        stage("Code Quality - Sonarqube"){
            steps{
                withSonarQubeEnv('Sonarqube') {
-                   sh "mvn -Dsonar.projectKey=pibfe sonar:sonar"
+                   sh "mvn -Dsonar.branch.longLivedBranches.regex='(branch|release|${env['GIT_BRANCH']}).*' -Dsonar.branch.name=${env['GIT_BRANCH']} -Dsonar.projectKey=pibfe-oct-qr sonar:sonar"
                }              
            }
        }
